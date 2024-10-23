@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ecotrack_lite/screens/step1.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LaunchScreen extends StatelessWidget {
@@ -7,7 +8,7 @@ class LaunchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
         child: Column(
@@ -16,32 +17,42 @@ class LaunchScreen extends StatelessWidget {
             const Image(image: AssetImage('images/logo-white.png')),
             const SizedBox(height: 50),
             ElevatedButton(
-              onPressed: (){},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FoodHabits())
+                    );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: buttoncolor,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 40, vertical: 22),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 22),
                 textStyle: GoogleFonts.dmSans(
-                  textStyle: const TextStyle(fontSize: 26,), 
+                  textStyle: const TextStyle(
+                    fontSize: 26,
+                  ),
                 ),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
-              
               child: const Text('Footprint Calculator'),
-              ),
-
-              const SizedBox(height: 50,),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
             TextButton(
-              onPressed: (){}, 
+              onPressed: () {},
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
                 textStyle: GoogleFonts.dmSans(
-                  textStyle: const TextStyle(fontSize: 16,), 
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
               child: const Text('Already a member? Login'),
-              )
+            )
           ],
         ),
       ),
