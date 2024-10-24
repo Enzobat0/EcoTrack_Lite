@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ecotrack_lite/screens/step6.dart';
+// import 'package:ecotrack_lite/screens/step4.dart';
 
-class HouseholdSize extends StatefulWidget {
-  const HouseholdSize({super.key});
+class Shopping extends StatefulWidget {
+  const Shopping({super.key});
 
   @override
-  State<HouseholdSize> createState() => _HouseholdSizeState();
+  State<Shopping> createState() => _ShoppingState();
 }
 
-class _HouseholdSizeState extends State<HouseholdSize> {
+class _ShoppingState extends State<Shopping> {
   static const Color primarycolor = Color(0xff34A353);
-  String? _selectedHouseholdSize;
+  String? _selectedShoppingHabit;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class _HouseholdSizeState extends State<HouseholdSize> {
 
                 //Heading: Step 1
                 Text(
-                  'Step 5: Household Size ',
+                  'Step 6: Shopping Habits ',
                   style: GoogleFonts.dmSans(
                     textStyle: const TextStyle(
                       color: primarycolor,
@@ -48,7 +48,8 @@ class _HouseholdSizeState extends State<HouseholdSize> {
 
                 // Question
                 Text(
-                  'How many people live in your home?',
+                  'How often do you shop for new items' 
+'(clothes,' 'gadgets, etc.)?',
                   style: GoogleFonts.dmSans(
                     textStyle: const TextStyle(
                       color: Colors.black,
@@ -63,10 +64,10 @@ class _HouseholdSizeState extends State<HouseholdSize> {
                         0.03), //dynamic space before radion buttons
 
                 
-                 // Household Size Radio Buttons
-                _buildHouseholdSizeOption('1-2'),
-                _buildHouseholdSizeOption('2-5'),
-                _buildHouseholdSizeOption('5 or more'),
+                 // Shopping Habit Options
+                _buildShoppingOption('Rarely (Once every 6 months or less)'),
+                _buildShoppingOption('Occasionally (Once a month)'),
+                _buildShoppingOption('Frequently (Once a week or more)'),
 
                 SizedBox(height: screenHeight * 0.1), // Spacing before purpose
 
@@ -84,7 +85,7 @@ class _HouseholdSizeState extends State<HouseholdSize> {
                     children: [
                       TextSpan(
                         text:
-                            'Understanding how many people share your living space helps us estimate energy consumption and overall carbon impact more accurately.',
+                            'Purchasing new items contributes to emissions, especially with non-sustainable brands.',
                         style: GoogleFonts.dmSans(
                           textStyle: const TextStyle(
                             color: Colors.black,
@@ -153,8 +154,8 @@ class _HouseholdSizeState extends State<HouseholdSize> {
                     // Next button
                     ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Shopping()));
+                      // Navigator.push(context,
+                          // MaterialPageRoute(builder: (context) => Household()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primarycolor,
@@ -198,14 +199,14 @@ class _HouseholdSizeState extends State<HouseholdSize> {
     );
   }
 
-/// Helper to build household size radio options
-  Widget _buildHouseholdSizeOption(String value) {
+// Helper to build shopping habit options
+  Widget _buildShoppingOption(String value) {
     return RadioListTile<String>(
       value: value,
-      groupValue: _selectedHouseholdSize,
+      groupValue: _selectedShoppingHabit,
       onChanged: (newValue) {
         setState(() {
-          _selectedHouseholdSize = newValue;
+          _selectedShoppingHabit = newValue;
         });
       },
       title: Text(
