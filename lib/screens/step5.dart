@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ecotrack_lite/screens/step4.dart';
 
-class FuelEnergy extends StatefulWidget {
-  const FuelEnergy({super.key});
+class Household extends StatefulWidget {
+  const Household({super.key});
 
   @override
-  State<FuelEnergy> createState() => _FuelEnergyState();
+  State<Household> createState() => _HouseholdState();
 }
 
-class _FuelEnergyState extends State<FuelEnergy> {
+class _HouseholdState extends State<Household> {
   static const Color primarycolor = Color(0xff34A353);
-  String? _selectedEnergy;
+  String? _selectedHouseholdSize;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class _FuelEnergyState extends State<FuelEnergy> {
 
                 //Heading: Step 1
                 Text(
-                  'Step 3: Fuel & Energy Use ',
+                  'Step 5: Household Size ',
                   style: GoogleFonts.dmSans(
                     textStyle: const TextStyle(
                       color: primarycolor,
@@ -48,7 +48,7 @@ class _FuelEnergyState extends State<FuelEnergy> {
 
                 // Question
                 Text(
-                  'What kind of energy do you use at home?',
+                  'How many people live in your home?',
                   style: GoogleFonts.dmSans(
                     textStyle: const TextStyle(
                       color: Colors.black,
@@ -63,10 +63,10 @@ class _FuelEnergyState extends State<FuelEnergy> {
                         0.03), //dynamic space before radion buttons
 
                 
-                // Energy Source Radio Buttons
-                _buildEnergyOption('Electricity'),
-                _buildEnergyOption('Solar Panels'),
-                _buildEnergyOption('Natural Gas'),
+                 // Household Size Radio Buttons
+                _buildHouseholdSizeOption('1-2'),
+                _buildHouseholdSizeOption('2-5'),
+                _buildHouseholdSizeOption('5 or more'),
 
                 SizedBox(height: screenHeight * 0.1), // Spacing before purpose
 
@@ -84,8 +84,7 @@ class _FuelEnergyState extends State<FuelEnergy> {
                     children: [
                       TextSpan(
                         text:
-                            'Energy usage impacts home carbon emissions, and knowing '
-                            'the source helps with more accurate footprint estimates.',
+                            'Understanding how many people share your living space helps us estimate energy consumption and overall carbon impact more accurately.',
                         style: GoogleFonts.dmSans(
                           textStyle: const TextStyle(
                             color: Colors.black,
@@ -98,6 +97,7 @@ class _FuelEnergyState extends State<FuelEnergy> {
                     ],
                   ),
                 ),
+
 
                 SizedBox(height: screenHeight * 0.1),
 
@@ -154,7 +154,7 @@ class _FuelEnergyState extends State<FuelEnergy> {
                     ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home()));
+                          MaterialPageRoute(builder: (context) => Household()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primarycolor,
@@ -198,14 +198,14 @@ class _FuelEnergyState extends State<FuelEnergy> {
     );
   }
 
-  // Helper to build energy radio options
-  Widget _buildEnergyOption(String value) {
+/// Helper to build household size radio options
+  Widget _buildHouseholdSizeOption(String value) {
     return RadioListTile<String>(
       value: value,
-      groupValue: _selectedEnergy,
+      groupValue: _selectedHouseholdSize,
       onChanged: (newValue) {
         setState(() {
-          _selectedEnergy = newValue;
+          _selectedHouseholdSize = newValue;
         });
       },
       title: Text(
