@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ecotrack_lite/screens/step2.dart';
 
 class FoodHabits extends StatefulWidget {
   const FoodHabits({super.key});
@@ -14,15 +15,23 @@ class _FoodHabitsState extends State<FoodHabits> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen height for dynamic spacing
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 45.0),
-          child: SingleChildScrollView( // Scrollable content for smaller screens
+          child: SingleChildScrollView(
+            // Scrollable content for smaller screens
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 20),
+                SizedBox(
+                  height: screenHeight * 0.02,
+                ), //Dynamic top padding
+
+                //Heading: Step 1
                 Text(
                   'Step 1: Food Habits',
                   style: GoogleFonts.dmSans(
@@ -33,7 +42,11 @@ class _FoodHabitsState extends State<FoodHabits> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 25),
+
+                SizedBox(
+                    height: screenHeight * 0.03), // dynamic space after heading
+
+                // Question
                 Text(
                   'What type of diet do you follow?',
                   style: GoogleFonts.dmSans(
@@ -44,7 +57,12 @@ class _FoodHabitsState extends State<FoodHabits> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
+
+                SizedBox(
+                    height: screenHeight *
+                        0.03), //dynamic space before radion buttons
+
+                // Radio Buttons
                 _buildRadioOption(
                   title: 'Plant-based',
                   description: '(Vegetarian/Vegan)',
@@ -65,7 +83,9 @@ class _FoodHabitsState extends State<FoodHabits> {
                   description: '(Daily consumption of meat and dairy)',
                   value: 'Meat-heavy',
                 ),
-                const SizedBox(height: 30),
+
+                SizedBox(height: screenHeight * 0.04),
+
                 RichText(
                   text: TextSpan(
                     text: 'Purpose: ',
@@ -93,34 +113,46 @@ class _FoodHabitsState extends State<FoodHabits> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 75),
+
+                SizedBox(height: screenHeight * 0.1),
+
                 Align(
                   alignment: Alignment.centerRight,
-                  child: ElevatedButton.icon(
+                  child: ElevatedButton(
                     onPressed: () {
-                      // Add your onPressed logic here
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Transport()));
                     },
-                    label: Text(
-                      'Next',
-                      style: GoogleFonts.dmSans(
-                        textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    icon: const Icon(
-                      Icons.arrow_right_alt_sharp,
-                      color: Colors.white,
-                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primarycolor,
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 19, vertical: 13,
+                        horizontal: 19,
+                        vertical: 13,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(2),
                       ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize
+                          .min, // Ensures button wraps around content
+                      children: [
+                        Text(
+                          'Next',
+                          style: GoogleFonts.dmSans(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                            width: 8), // Spacing between text and icon
+                        const Icon(
+                          Icons.arrow_right_alt_sharp,
+                          color: Colors.white,
+                        ),
+                      ],
                     ),
                   ),
                 ),
