@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ecotrack_lite/screens/step3.dart';
+import 'package:ecotrack_lite/screens/step4.dart';
 
-class Transport extends StatefulWidget {
-  const Transport({super.key});
+class FuelEnergy extends StatefulWidget {
+  const FuelEnergy({super.key});
 
   @override
-  State<Transport> createState() => _TransportState();
+  State<FuelEnergy> createState() => _FuelEnergyState();
 }
 
-class _TransportState extends State<Transport> {
+class _FuelEnergyState extends State<FuelEnergy> {
   static const Color primarycolor = Color(0xff34A353);
-  String? _selectedTransport;
-  String? _selectedKm;
+  String? _selectedEnergy;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +31,9 @@ class _TransportState extends State<Transport> {
                   height: screenHeight * 0.02,
                 ), //Dynamic top padding
 
-                //Heading: Step 2
+                //Heading: Step 1
                 Text(
-                  'Step 2: Transport',
+                  'Step 3: Fuel & Energy Use ',
                   style: GoogleFonts.dmSans(
                     textStyle: const TextStyle(
                       color: primarycolor,
@@ -49,7 +48,7 @@ class _TransportState extends State<Transport> {
 
                 // Question
                 Text(
-                  'How do you usually get around?',
+                  'What kind of energy do you use at home?',
                   style: GoogleFonts.dmSans(
                     textStyle: const TextStyle(
                       color: Colors.black,
@@ -63,41 +62,15 @@ class _TransportState extends State<Transport> {
                     height: screenHeight *
                         0.03), //dynamic space before radion buttons
 
-                // Radio Buttons for Transport Types
-                _buildTransportOption('Car (gasoline, hybrid, or electric)'),
-                _buildTransportOption('Public transport (bus, train, subway)'),
-                _buildTransportOption('Bike/Walk'),
+                
+                // Energy Source Radio Buttons
+                _buildEnergyOption('Electricity'),
+                _buildEnergyOption('Solar Panels'),
+                _buildEnergyOption('Natural Gas'),
 
-                // Show follow-up question only if 'Car' is selected
-                if (_selectedTransport == 'Car (gasoline, hybrid, or electric)')
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Follow-up question: Kilometers driven
-                        Text(
-                          'How many kilometers do you drive/ride?',
-                          style: GoogleFonts.dmSans(
-                            textStyle: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        // Follow-up radio buttons for kilometers
-                        _buildKilometersOption('Less than 10 km/day'),
-                        _buildKilometersOption('10-30 km/day'),
-                        _buildKilometersOption('30-50 km/day'),
-                      ],
-                    ),
-                  ),
+                SizedBox(height: screenHeight * 0.1), // Spacing before purpose
 
-                  SizedBox(height: screenHeight * 0.1),
-                  
-                  // Purpose
-
+                // Purpose Section
                 RichText(
                   text: TextSpan(
                     text: 'Purpose: ',
@@ -111,8 +84,8 @@ class _TransportState extends State<Transport> {
                     children: [
                       TextSpan(
                         text:
-                            'Diet is a key factor in individual carbon footprints, '
-                            'especially meat consumption.',
+                            'Energy usage impacts home carbon emissions, and knowing '
+                            'the source helps with more accurate footprint estimates.',
                         style: GoogleFonts.dmSans(
                           textStyle: const TextStyle(
                             color: Colors.black,
@@ -126,10 +99,9 @@ class _TransportState extends State<Transport> {
                   ),
                 ),
 
-                 SizedBox(height: screenHeight * 0.1),
+                SizedBox(height: screenHeight * 0.1),
 
-                //  Navigation Buttons
-
+// Navigation buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -226,44 +198,20 @@ class _TransportState extends State<Transport> {
     );
   }
 
-  // Helper to build transport radio options
-  Widget _buildTransportOption(String value) {
+  // Helper to build energy radio options
+  Widget _buildEnergyOption(String value) {
     return RadioListTile<String>(
       value: value,
-      groupValue: _selectedTransport,
+      groupValue: _selectedEnergy,
       onChanged: (newValue) {
         setState(() {
-          _selectedTransport = newValue;
-          if (newValue != 'Car (gasoline, hybrid, or electric)') {
-            _selectedKm = null; // Reset kilometers selection
-          }
+          _selectedEnergy = newValue;
         });
       },
       title: Text(
         value,
         style: GoogleFonts.dmSans(
           textStyle: const TextStyle(fontSize: 18, color: Colors.black),
-        ),
-      ),
-      activeColor: primarycolor,
-      controlAffinity: ListTileControlAffinity.leading,
-    );
-  }
-
-// Helper to build kilometer radio options
-  Widget _buildKilometersOption(String value) {
-    return RadioListTile<String>(
-      value: value,
-      groupValue: _selectedKm,
-      onChanged: (newValue) {
-        setState(() {
-          _selectedKm = newValue;
-        });
-      },
-      title: Text(
-        value,
-        style: GoogleFonts.dmSans(
-          textStyle: const TextStyle(fontSize: 16, color: Colors.black),
         ),
       ),
       activeColor: primarycolor,
