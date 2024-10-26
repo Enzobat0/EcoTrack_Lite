@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +20,5 @@ flutter:
   uses-material-design: true
   assets:
     - images/logo-white.png
+    - images/profile01.jpg
+    - images/settings001.jpg
