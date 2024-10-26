@@ -149,7 +149,7 @@ class _FoodHabitsState extends State<FoodHabits> {
                         const SizedBox(
                             width: 8), // Spacing between text and icon
                         const Icon(
-                          Icons.arrow_right_alt_sharp,
+                          Icons.arrow_forward,
                           color: Colors.white,
                         ),
                       ],

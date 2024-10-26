@@ -155,7 +155,7 @@ class _TransportState extends State<Transport> {
                           .min, // Ensures button wraps around content
                       children: [
                         const Icon(
-                          Icons.arrow_left,
+                          Icons.arrow_back,
                           color: primarycolor,
                         ),
 
@@ -210,7 +210,7 @@ class _TransportState extends State<Transport> {
                         const SizedBox(
                             width: 8), // Spacing between text and icon
                         const Icon(
-                          Icons.arrow_right_alt_sharp,
+                          Icons.arrow_forward,
                           color: Colors.white,
                         ),
                       ],

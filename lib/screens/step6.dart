@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:ecotrack_lite/screens/step4.dart';
+import 'package:ecotrack_lite/screens/results.dart';
 
 class Shopping extends StatefulWidget {
   const Shopping({super.key});
@@ -128,7 +128,7 @@ class _ShoppingState extends State<Shopping> {
                           .min, // Ensures button wraps around content
                       children: [
                         const Icon(
-                          Icons.arrow_left,
+                          Icons.arrow_back,
                           color: primarycolor,
                         ),
 
@@ -154,8 +154,8 @@ class _ShoppingState extends State<Shopping> {
                     // Next button
                     ElevatedButton(
                     onPressed: () {
-                      // Navigator.push(context,
-                          // MaterialPageRoute(builder: (context) => Household()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Results()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primarycolor,
@@ -183,7 +183,7 @@ class _ShoppingState extends State<Shopping> {
                         const SizedBox(
                             width: 8), // Spacing between text and icon
                         const Icon(
-                          Icons.arrow_right_alt_sharp,
+                          Icons.arrow_forward,
                           color: Colors.white,
                         ),
                       ],

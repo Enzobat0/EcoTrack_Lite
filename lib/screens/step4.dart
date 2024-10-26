@@ -154,7 +154,7 @@ class _HomeState extends State<Home> {
                     ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Household()));
+                          MaterialPageRoute(builder: (context) => HouseholdSize()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primarycolor,
@@ -182,7 +182,7 @@ class _HomeState extends State<Home> {
                         const SizedBox(
                             width: 8), // Spacing between text and icon
                         const Icon(
-                          Icons.arrow_right_alt_sharp,
+                          Icons.arrow_forward,
                           color: Colors.white,
                         ),
                       ],
