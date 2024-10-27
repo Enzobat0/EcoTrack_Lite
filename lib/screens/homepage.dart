@@ -1,6 +1,8 @@
 import 'dart:math'; // For generating random values
+import 'package:ecotrack_lite/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:ecotrack_lite/screens/step1.dart';
+import 'package:ecotrack_lite/screens/ecotips.dart';
 import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
 
 void main() {
@@ -41,7 +43,8 @@ class HomePage extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Padding(
+      body: SingleChildScrollView(
+        // Added SingleChildScrollView
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,10 +82,8 @@ class HomePage extends StatelessWidget {
               alignment: Alignment.centerLeft, // Align to the left
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FoodHabits())
-                  );
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FoodHabits()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white, // White background
@@ -100,6 +101,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 20), // Optional: Space at the bottom
           ],
         ),
       ),
@@ -125,13 +127,18 @@ class HomePage extends StatelessWidget {
           // Handle navigation based on the index tapped
           switch (index) {
             case 0:
-              // Navigate to Home
+              // Already on home
+
               break;
             case 1:
               // Navigate to EcoTips
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => EcoTipsPage()));
               break;
             case 2:
               // Navigate to Profile
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
               break;
           }
         },
