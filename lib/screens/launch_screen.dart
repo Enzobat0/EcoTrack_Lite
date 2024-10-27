@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ecotrack_lite/screens/step1.dart';
-import 'package:ecotrack_lite/screens/sign_in_screen.dart';
+import 'package:ecotrack_lite/screens/login.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LaunchScreen extends StatelessWidget {
@@ -46,7 +46,7 @@ class LaunchScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AuthScreen()));
+                        builder: (context) => const LoginScreen()));
               },
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
