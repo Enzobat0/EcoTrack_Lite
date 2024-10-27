@@ -1,5 +1,6 @@
 import 'package:ecotrack_lite/screens/sign_up.dart';
 import 'package:flutter/material.dart';
+import 'package:ecotrack_lite/screens/homepage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -153,7 +154,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 24),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context,
+                               MaterialPageRoute(builder: (context)=> HomePage()));
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4CAF50),
                               minimumSize: const Size.fromHeight(48),
