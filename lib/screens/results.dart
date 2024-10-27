@@ -1,5 +1,7 @@
+import 'package:ecotrack_lite/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ecotrack_lite/screens/sign_up.dart';
 
 class Results extends StatefulWidget {
   const Results({super.key});
@@ -45,6 +47,11 @@ class _ResultsState extends State<Results> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Navigate to Register Screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignupScreen()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primarycolor,
@@ -74,7 +81,8 @@ class _ResultsState extends State<Results> {
                   ),
                 ),
 
-                SizedBox(height: screenHeight * 0.03), // Spacing between buttons
+                SizedBox(
+                    height: screenHeight * 0.03), // Spacing between buttons
 
                 // Go Back & Edit Button
                 SizedBox(
@@ -113,7 +121,8 @@ class _ResultsState extends State<Results> {
                   ),
                 ),
 
-                SizedBox(height: screenHeight * 0.15), // Spacing before bottom text
+                SizedBox(
+                    height: screenHeight * 0.15), // Spacing before bottom text
 
                 // Already have an account? Login text
                 Row(
@@ -131,6 +140,10 @@ class _ResultsState extends State<Results> {
                     GestureDetector(
                       onTap: () {
                         // Navigate to Login Screen
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()));
                       },
                       child: Text(
                         'Login',

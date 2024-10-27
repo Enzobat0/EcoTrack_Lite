@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^6.2.1
+  email_validator: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -20,3 +21,4 @@ flutter:
   uses-material-design: true
   assets:
     - images/logo-white.png
+    - images/google_logo.png
