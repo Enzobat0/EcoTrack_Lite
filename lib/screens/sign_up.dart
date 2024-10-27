@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ecotrack_lite/screens/homepage.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -119,7 +120,10 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           const SizedBox(height: 24),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context,
+                               MaterialPageRoute(builder: (context)=> HomePage()));
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4CAF50),
                               minimumSize: const Size.fromHeight(48),
