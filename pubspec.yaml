@@ -22,3 +22,4 @@ flutter:
   assets:
     - images/logo-white.png
     - images/google_logo.png
+    - images/profile_placeholder.png
