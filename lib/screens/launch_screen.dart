@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ecotrack_lite/screens/step1.dart';
+import 'package:ecotrack_lite/screens/sign_in_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LaunchScreen extends StatelessWidget {
@@ -19,8 +20,7 @@ class LaunchScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FoodHabits())
-                    );
+                    MaterialPageRoute(builder: (context) => FoodHabits()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: buttoncolor,
@@ -42,7 +42,12 @@ class LaunchScreen extends StatelessWidget {
               height: 50,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AuthScreen()));
+              },
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
                 textStyle: GoogleFonts.dmSans(
