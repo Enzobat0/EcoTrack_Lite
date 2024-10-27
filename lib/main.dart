@@ -1,18 +1,22 @@
+import 'package:Ecotrack_lite/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
-import 'screens/launch_screen.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const EcoTrackApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class EcoTrackApp extends StatelessWidget {
+  const EcoTrackApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'EcoTrack Lite',
-      home: LaunchScreen(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'EcoTrack',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+      home: const AuthScreen(),
     );
   }
 }
