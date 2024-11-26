@@ -1,6 +1,42 @@
   import 'package:flutter/material.dart';
   import 'package:ecotrack_lite/screens/homepage.dart';
   import 'package:firebase_auth/firebase_auth.dart';
+  import 'package:google_sign_in/google_sign_in.dart';
+
+  Future<User?> signInWithGoogle() async {
+  try {
+    // Trigger Google Sign-In
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    if (googleUser == null) {
+      print('Google Sign-In canceled by user.');
+      return null;
+    }
+
+    // Obtain Google Sign-In authentication details
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    // Check for missing tokens
+    if (googleAuth.accessToken == null || googleAuth.idToken == null) {
+      print('Google Sign-In tokens are missing.');
+      return null;
+    }
+
+    // Create a credential for Firebase
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Authenticate with Firebase
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+
+    print('Google Sign-In successful: ${userCredential.user}');
+    return userCredential.user;
+  } catch (e) {
+    print('Google Sign-In Error: $e');
+    return null;
+  }
+}
 
 
   class SignupScreen extends StatefulWidget {
@@ -189,9 +225,28 @@
                                 ),
                               ),
                             ),
+
+                            // Google signup
+
                             const SizedBox(height: 16),
                             OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () async{
+                                setState(() => _isLoading = true); // Optional: show a loading indicator
+                                final user = await signInWithGoogle();
+                                setState(() => _isLoading = false);
+
+                                if (user != null) {
+                                  // Navigate to the homepage on success
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => HomePage()),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Google Sign-In failed. Please try again.')),
+                                  );
+                                }
+                              },
                               style: OutlinedButton.styleFrom(
                                 minimumSize: const Size.fromHeight(48),
                                 shape: RoundedRectangleBorder(

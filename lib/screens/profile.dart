@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ecotrack_lite/screens/homepage.dart';
 import 'package:ecotrack_lite/screens/ecotips.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ecotrack_lite/screens/login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 class ProfilePage extends StatelessWidget {
   final int _currentIndex = 2; // Set the initial index to 2 for Profile
 
+
   @override
   Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -24,17 +31,20 @@ class ProfilePage extends StatelessWidget {
             Center(
               child: CircleAvatar(
                 radius: 60,
-                backgroundImage: AssetImage('images/profile_placeholder.png'), // Replace with actual image path
+                backgroundImage: user?.photoURL != null
+                    ? NetworkImage(user!.photoURL!)
+                    : const AssetImage('images/profile_placeholder.png')
+                        as ImageProvider, 
               ),
             ),
             const SizedBox(height: 20),
             Text(
-              'User Name',
+              user?.displayName ?? 'User Name',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Text(
-              'user.email@example.com',
+              user?.email ?? 'user.email@example.com',
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 10),
@@ -68,8 +78,18 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 20),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  // Add logout functionality
+                onPressed: () async {
+                  // Sign out from Firebase
+                  await FirebaseAuth.instance.signOut();
+
+                  // Disconnect Google Sign-In to clear session
+                  await googleSignIn.signOut();
+
+                  // Navigate to the Login Screen
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
                 },
                 child: Text('Logout'),
                 style: ElevatedButton.styleFrom(

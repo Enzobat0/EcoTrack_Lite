@@ -1,6 +1,44 @@
 import 'package:ecotrack_lite/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:ecotrack_lite/screens/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+Future<User?> signInWithGoogle() async {
+  try {
+    // Trigger Google Sign-In
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    if (googleUser == null) {
+      print('Google Sign-In canceled by user.');
+      return null;
+    }
+
+    // Obtain Google Sign-In authentication details
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    // Check for missing tokens
+    if (googleAuth.accessToken == null || googleAuth.idToken == null) {
+      print('Google Sign-In tokens are missing.');
+      return null;
+    }
+
+    // Create a credential for Firebase
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Authenticate with Firebase
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+
+    print('Google Sign-In successful: ${userCredential.user}');
+    return userCredential.user;
+  } catch (e) {
+    print('Google Sign-In Error: $e');
+    return null;
+  }
+}
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,7 +49,55 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool _rememberMe = false;
+  bool _isLoading = false;
+
+  void _loginUser() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        final UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        // Navigate to HomePage after successful login
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) =>  HomePage()),
+        );
+      } on FirebaseAuthException catch (e) {
+        String errorMessage;
+        if (e.code == 'user-not-found') {
+          errorMessage = 'No user found with this email.';
+        } else if (e.code == 'wrong-password') {
+          errorMessage = 'Incorrect password.';
+        } else {
+          errorMessage = 'An error occurred. Please try again.';
+        }
+        _showErrorDialog(errorMessage);
+      }
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Login Failed'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +146,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 14,
                       ),
                     ),
+
+                    // form
                     const SizedBox(height: 24),
                     Form(
                       key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        // Email
                         children: [
                           const Text(
                             'Email address',
@@ -75,23 +164,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 8),
                           TextFormField(
+                            controller: _emailController,
+                            keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              hintText: 'Ecotrack@gmail.com',
-                              hintStyle: TextStyle(color: Colors.grey[400]),
+                              hintText: 'placeholder@example.com',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(color: Colors.grey[300]!),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(color: Colors.grey[300]!),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(color: Color(0xFF4CAF50)),
                               ),
                             ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your email.';
+                              }
+                              return null;
+                            },
                           ),
+
+                          // passwd
                           const SizedBox(height: 16),
                           const Text(
                             'Password',
@@ -102,23 +191,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 8),
                           TextFormField(
+                            controller: _passwordController,
                             obscureText: true,
                             decoration: InputDecoration(
                               hintText: 'Must be 8 characters',
-                              hintStyle: TextStyle(color: Colors.grey[400]),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(color: Colors.grey[300]!),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(color: Colors.grey[300]!),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(color: Color(0xFF4CAF50)),
                               ),
                             ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your password.';
+                              }
+                              return null;
+                            },
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,10 +240,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 24),
                           ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(context,
-                               MaterialPageRoute(builder: (context)=> HomePage()));
-                            },
+                            onPressed: _loginUser,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4CAF50),
                               minimumSize: const Size.fromHeight(48),
@@ -173,34 +256,51 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
+
                           const SizedBox(height: 16),
                           OutlinedButton(
-                            onPressed: () {},
-                            style: OutlinedButton.styleFrom(
-                              minimumSize: const Size.fromHeight(48),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                              onPressed: () async{
+                                setState(() => _isLoading = true); // Optional: show a loading indicator
+                                final user = await signInWithGoogle();
+                                setState(() => _isLoading = false);
+
+                                if (user != null) {
+                                  // Navigate to the homepage on success
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => HomePage()),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Google Sign-In failed. Please try again.')),
+                                  );
+                                }
+                              },
+                              style: OutlinedButton.styleFrom(
+                                minimumSize: const Size.fromHeight(48),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                side: BorderSide(color: Colors.grey[300]!),
                               ),
-                              side: BorderSide(color: Colors.grey[300]!),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'images/google_logo.png',
-                                  height: 24,
-                                ),
-                                const SizedBox(width: 8),
-                                const Text(
-                                  'Sign Up with Google',
-                                  style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 16,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'images/google_logo.png',
+                                    height: 24,
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(width: 8),
+                                  const Text(
+                                    'Sign Up with Google',
+                                    style: TextStyle(
+                                      color: Colors.black87,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
                           const SizedBox(height: 24),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
