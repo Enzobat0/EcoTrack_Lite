@@ -141,7 +141,7 @@ class _TransportState extends State<Transport> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        side: BorderSide(color: primarycolor),
+                        side: const BorderSide(color: primarycolor),
                         padding: const EdgeInsets.symmetric(
                           horizontal: 19,
                           vertical: 13,
@@ -182,7 +182,7 @@ class _TransportState extends State<Transport> {
                     ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => FuelEnergy()));
+                          MaterialPageRoute(builder: (context) => const FuelEnergy()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primarycolor,

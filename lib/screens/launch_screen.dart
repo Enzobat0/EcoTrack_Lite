@@ -20,7 +20,7 @@ class LaunchScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FoodHabits()));
+                    MaterialPageRoute(builder: (context) => const FoodHabits()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: buttoncolor,

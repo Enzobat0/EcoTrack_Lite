@@ -10,6 +10,8 @@ void main() {
 }
 
 class EcoTrackLiteApp extends StatelessWidget {
+  const EcoTrackLiteApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,7 +58,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               '${totalFootprint.toStringAsFixed(2)} Tons CO₂',
-              style: TextStyle(
+              style: const TextStyle(
                 color: primaryColor,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -83,18 +85,18 @@ class HomePage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FoodHabits()));
+                      MaterialPageRoute(builder: (context) => const FoodHabits()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white, // White background
-                  side: BorderSide(color: primaryColor), // Primary color border
+                  side: const BorderSide(color: primaryColor), // Primary color border
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Recalculate',
                   style: TextStyle(
                       color: primaryColor, fontSize: 20), // Primary color text

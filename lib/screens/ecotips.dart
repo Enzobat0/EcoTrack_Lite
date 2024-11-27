@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ecotrack_lite/screens/homepage.dart'; 
 
 class EcoTipsPage extends StatefulWidget {
+  const EcoTipsPage({super.key});
+
   @override
   _EcoTipsPageState createState() => _EcoTipsPageState();
 }

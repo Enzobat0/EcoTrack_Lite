@@ -272,7 +272,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Google Sign-In failed. Please try again.')),
+                                    const SnackBar(content: Text('Google Sign-In failed. Please try again.')),
                                   );
                                 }
                               },
