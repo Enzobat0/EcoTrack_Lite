@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:ecotrack_lite/screens/step1.dart';
 import 'package:ecotrack_lite/screens/ecotips.dart';
 import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
+// ignore: unused_import
+import 'crud_screen.dart'; // Import the CRUD screen
 
 void main() {
-  runApp(EcoTrackLiteApp());
+  runApp(const EcoTrackLiteApp());
 }
 
 class EcoTrackLiteApp extends StatelessWidget {
+  const EcoTrackLiteApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,7 +60,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               '${totalFootprint.toStringAsFixed(2)} Tons CO₂',
-              style: TextStyle(
+              style: const TextStyle(
                 color: primaryColor,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -82,19 +86,22 @@ class HomePage extends StatelessWidget {
               alignment: Alignment.centerLeft, // Align to the left
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FoodHabits()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FoodHabits()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white, // White background
-                  side: BorderSide(color: primaryColor), // Primary color border
+                  side: const BorderSide(
+                      color: primaryColor), // Primary color border
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Recalculate',
                   style: TextStyle(
                       color: primaryColor, fontSize: 20), // Primary color text
@@ -133,12 +140,12 @@ class HomePage extends StatelessWidget {
             case 1:
               // Navigate to EcoTips
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => EcoTipsPage()));
+                  MaterialPageRoute(builder: (context) => const EcoTipsPage()));
               break;
             case 2:
               // Navigate to Profile
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
+                  MaterialPageRoute(builder: (context) => const ProfilePage()));
               break;
           }
         },

@@ -120,8 +120,10 @@ class _FoodHabitsState extends State<FoodHabits> {
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Transport()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Transport()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primarycolor,

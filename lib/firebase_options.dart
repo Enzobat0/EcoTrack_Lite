@@ -63,8 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '450292522733',
     projectId: 'ecotrack-f02d3',
     storageBucket: 'ecotrack-f02d3.firebasestorage.app',
-    iosClientId: '450292522733-r32r9btchl6gnapr8ctm859t666kepoe.apps.googleusercontent.com',
+    iosClientId:
+        '450292522733-r32r9btchl6gnapr8ctm859t666kepoe.apps.googleusercontent.com',
     iosBundleId: 'com.example.ecotrackLite',
   );
-
 }

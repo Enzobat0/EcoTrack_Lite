@@ -14,7 +14,8 @@ Future<User?> signInWithGoogle() async {
     }
 
     // Obtain Google Sign-In authentication details
-    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
 
     // Check for missing tokens
     if (googleAuth.accessToken == null || googleAuth.idToken == null) {
@@ -29,7 +30,8 @@ Future<User?> signInWithGoogle() async {
     );
 
     // Authenticate with Firebase
-    UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
 
     print('Google Sign-In successful: ${userCredential.user}');
     return userCredential.user;
@@ -38,7 +40,6 @@ Future<User?> signInWithGoogle() async {
     return null;
   }
 }
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -57,15 +58,15 @@ class _LoginScreenState extends State<LoginScreen> {
   void _loginUser() async {
     if (_formKey.currentState!.validate()) {
       try {
-        final UserCredential userCredential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
+        final UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
         // Navigate to HomePage after successful login
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>  HomePage()),
+          MaterialPageRoute(builder: (context) => HomePage()),
         );
       } on FirebaseAuthException catch (e) {
         String errorMessage;
@@ -259,48 +260,52 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           const SizedBox(height: 16),
                           OutlinedButton(
-                              onPressed: () async{
-                                setState(() => _isLoading = true); // Optional: show a loading indicator
-                                final user = await signInWithGoogle();
-                                setState(() => _isLoading = false);
+                            onPressed: () async {
+                              setState(() => _isLoading =
+                                  true); // Optional: show a loading indicator
+                              final user = await signInWithGoogle();
+                              setState(() => _isLoading = false);
 
-                                if (user != null) {
-                                  // Navigate to the homepage on success
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => HomePage()),
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Google Sign-In failed. Please try again.')),
-                                  );
-                                }
-                              },
-                              style: OutlinedButton.styleFrom(
-                                minimumSize: const Size.fromHeight(48),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                side: BorderSide(color: Colors.grey[300]!),
+                              if (user != null) {
+                                // Navigate to the homepage on success
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          'Google Sign-In failed. Please try again.')),
+                                );
+                              }
+                            },
+                            style: OutlinedButton.styleFrom(
+                              minimumSize: const Size.fromHeight(48),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'images/google_logo.png',
-                                    height: 24,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  const Text(
-                                    'Sign Up with Google',
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              side: BorderSide(color: Colors.grey[300]!),
                             ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'images/google_logo.png',
+                                  height: 24,
+                                ),
+                                const SizedBox(width: 8),
+                                const Text(
+                                  'Sign Up with Google',
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           const SizedBox(height: 24),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -314,7 +319,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const SignupScreen(),
+                                      builder: (context) =>
+                                          const SignupScreen(),
                                     ),
                                   );
                                 },

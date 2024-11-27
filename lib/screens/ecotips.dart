@@ -1,9 +1,11 @@
 import 'package:ecotrack_lite/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ecotrack_lite/screens/homepage.dart'; 
+import 'package:ecotrack_lite/screens/homepage.dart';
 
 class EcoTipsPage extends StatefulWidget {
+  const EcoTipsPage({super.key});
+
   @override
   _EcoTipsPageState createState() => _EcoTipsPageState();
 }
@@ -21,7 +23,8 @@ class _EcoTipsPageState extends State<EcoTipsPage> {
         ),
         backgroundColor: const Color(0xff34A353),
       ),
-      body: SingleChildScrollView( // Wrap the content in SingleChildScrollView
+      body: SingleChildScrollView(
+        // Wrap the content in SingleChildScrollView
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,13 +37,13 @@ class _EcoTipsPageState extends State<EcoTipsPage> {
             _buildTip(
               '1. Reduce, Reuse, Recycle',
               'Minimize waste by recycling materials and reusing items whenever possible. '
-              'This helps conserve resources and reduce pollution.',
+                  'This helps conserve resources and reduce pollution.',
             ),
             const SizedBox(height: 15),
             _buildTip(
               '2. Use Energy-Efficient Appliances',
               'Opt for appliances that consume less energy. '
-              'They not only reduce your energy bill but also help decrease your carbon footprint.',
+                  'They not only reduce your energy bill but also help decrease your carbon footprint.',
             ),
             const SizedBox(height: 15),
             _buildTip(
@@ -51,7 +54,7 @@ class _EcoTipsPageState extends State<EcoTipsPage> {
             _buildTip(
               '4. Choose Sustainable Transportation',
               'Whenever possible, walk, bike, or use public transport. '
-              'This reduces greenhouse gas emissions and helps keep our air clean.',
+                  'This reduces greenhouse gas emissions and helps keep our air clean.',
             ),
             const SizedBox(height: 15),
             _buildTip(
@@ -103,7 +106,9 @@ class _EcoTipsPageState extends State<EcoTipsPage> {
             case 2:
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => ProfilePage()), // Adjust to your Profile page
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const ProfilePage()), // Adjust to your Profile page
               );
               break;
           }

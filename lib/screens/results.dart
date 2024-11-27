@@ -32,7 +32,7 @@ class _ResultsState extends State<Results> {
                   'All set! Let’s see your results!',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       color: primarycolor,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -93,7 +93,7 @@ class _ResultsState extends State<Results> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      side: BorderSide(color: primarycolor),
+                      side: const BorderSide(color: primarycolor),
                       padding: const EdgeInsets.symmetric(
                         vertical: 13,
                       ),
@@ -109,7 +109,7 @@ class _ResultsState extends State<Results> {
                         Text(
                           'Go back & Edit',
                           style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                               color: primarycolor,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -143,12 +143,12 @@ class _ResultsState extends State<Results> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()));
+                                builder: (context) => const LoginScreen()));
                       },
                       child: Text(
                         'Login',
                         style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             color: primarycolor,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

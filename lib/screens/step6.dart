@@ -48,8 +48,9 @@ class _ShoppingState extends State<Shopping> {
 
                 // Question
                 Text(
-                  'How often do you shop for new items' 
-'(clothes,' 'gadgets, etc.)?',
+                  'How often do you shop for new items'
+                  '(clothes,'
+                  'gadgets, etc.)?',
                   style: GoogleFonts.dmSans(
                     textStyle: const TextStyle(
                       color: Colors.black,
@@ -63,8 +64,7 @@ class _ShoppingState extends State<Shopping> {
                     height: screenHeight *
                         0.03), //dynamic space before radion buttons
 
-                
-                 // Shopping Habit Options
+                // Shopping Habit Options
                 _buildShoppingOption('Rarely (Once every 6 months or less)'),
                 _buildShoppingOption('Occasionally (Once a month)'),
                 _buildShoppingOption('Frequently (Once a week or more)'),
@@ -99,7 +99,6 @@ class _ShoppingState extends State<Shopping> {
                   ),
                 ),
 
-
                 SizedBox(height: screenHeight * 0.1),
 
 // Navigation buttons
@@ -109,12 +108,11 @@ class _ShoppingState extends State<Shopping> {
                     // Previous button
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(
-                            context);
+                        Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        side: BorderSide(color: primarycolor),
+                        side: const BorderSide(color: primarycolor),
                         padding: const EdgeInsets.symmetric(
                           horizontal: 19,
                           vertical: 13,
@@ -125,70 +123,70 @@ class _ShoppingState extends State<Shopping> {
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize
-                          .min, // Ensures button wraps around content
-                      children: [
-                        const Icon(
-                          Icons.arrow_back,
-                          color: primarycolor,
-                        ),
+                            .min, // Ensures button wraps around content
+                        children: [
+                          const Icon(
+                            Icons.arrow_back,
+                            color: primarycolor,
+                          ),
 
-                        const SizedBox(
-                            width: 8), 
+                          const SizedBox(width: 8),
 
-                        Text(
-                          'Previous',
-                          style: GoogleFonts.dmSans(
-                            textStyle: const TextStyle(
-                              color: primarycolor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                          Text(
+                            'Previous',
+                            style: GoogleFonts.dmSans(
+                              textStyle: const TextStyle(
+                                color: primarycolor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        // Spacing between text and icon
-                      
-                      ],
+                          // Spacing between text and icon
+                        ],
                       ),
                     ),
 
                     // Next button
                     ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Results()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primarycolor,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 19,
-                        vertical: 13,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Results()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: primarycolor,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 19,
+                          vertical: 13,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(2),
+                        ),
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize
-                          .min, // Ensures button wraps around content
-                      children: [
-                        Text(
-                          'Next',
-                          style: GoogleFonts.dmSans(
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
+                      child: Row(
+                        mainAxisSize: MainAxisSize
+                            .min, // Ensures button wraps around content
+                        children: [
+                          Text(
+                            'Next',
+                            style: GoogleFonts.dmSans(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                            width: 8), // Spacing between text and icon
-                        const Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                      ],
+                          const SizedBox(
+                              width: 8), // Spacing between text and icon
+                          const Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                   ],
                 )
               ],

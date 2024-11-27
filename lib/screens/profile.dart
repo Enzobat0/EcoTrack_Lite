@@ -6,10 +6,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ecotrack_lite/screens/login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-
 class ProfilePage extends StatelessWidget {
-  final int _currentIndex = 2; // Set the initial index to 2 for Profile
+  final int _currentIndex = 2;
 
+  const ProfilePage({super.key}); // Set the initial index to 2 for Profile
 
   @override
   Widget build(BuildContext context) {
@@ -34,31 +34,31 @@ class ProfilePage extends StatelessWidget {
                 backgroundImage: user?.photoURL != null
                     ? NetworkImage(user!.photoURL!)
                     : const AssetImage('images/profile_placeholder.png')
-                        as ImageProvider, 
+                        as ImageProvider,
               ),
             ),
             const SizedBox(height: 20),
             Text(
               user?.displayName ?? 'User Name',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Text(
               user?.email ?? 'user.email@example.com',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+              style: const TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 10),
-            Text(
+            const Text(
               'Location: City, Country',
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 20),
-            Text(
+            const Text(
               'Bio:',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 5),
-            Text(
+            const Text(
               'A short biography about the user goes here. This can include interests, hobbies, and other relevant information.',
               style: TextStyle(fontSize: 16),
             ),
@@ -68,11 +68,11 @@ class ProfilePage extends StatelessWidget {
                 onPressed: () {
                   // Navigate to Edit Profile page or show dialog
                 },
-                child: Text('Edit Profile'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xff34A353), // Background color
                   foregroundColor: Colors.white, // Text color
                 ),
+                child: const Text('Edit Profile'),
               ),
             ),
             const SizedBox(height: 20),
@@ -88,14 +88,15 @@ class ProfilePage extends StatelessWidget {
                   // Navigate to the Login Screen
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
                   );
                 },
-                child: Text('Logout'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red, // Logout button color
                   foregroundColor: Colors.white, // Text color
                 ),
+                child: const Text('Logout'),
               ),
             ),
           ],
@@ -133,7 +134,7 @@ class ProfilePage extends StatelessWidget {
               // Navigate to EcoTips
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => EcoTipsPage()),
+                MaterialPageRoute(builder: (context) => const EcoTipsPage()),
               );
               break;
             case 2:

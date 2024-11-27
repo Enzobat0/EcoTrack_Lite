@@ -15,11 +15,13 @@ class EcoTipsScreen extends StatelessWidget {
     "Support local businesses"
   ];
 
+  const EcoTipsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Eco Tips'),
+        title: const Text('Eco Tips'),
         backgroundColor: Colors.green, // Optional: Set AppBar color to green
       ),
       body: Container(
@@ -31,12 +33,12 @@ class EcoTipsScreen extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) => Card(
             color: Colors.black, // Background color of the card
             elevation: 4,
-            margin: EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 ecoTips[index],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.green, // Text color set to green

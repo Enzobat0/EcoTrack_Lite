@@ -19,8 +19,10 @@ class LaunchScreen extends StatelessWidget {
             const SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FoodHabits()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FoodHabits()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: buttoncolor,

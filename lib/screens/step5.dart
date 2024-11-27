@@ -62,8 +62,7 @@ class _HouseholdSizeState extends State<HouseholdSize> {
                     height: screenHeight *
                         0.03), //dynamic space before radion buttons
 
-                
-                 // Household Size Radio Buttons
+                // Household Size Radio Buttons
                 _buildHouseholdSizeOption('1-2'),
                 _buildHouseholdSizeOption('2-5'),
                 _buildHouseholdSizeOption('5 or more'),
@@ -98,7 +97,6 @@ class _HouseholdSizeState extends State<HouseholdSize> {
                   ),
                 ),
 
-
                 SizedBox(height: screenHeight * 0.1),
 
 // Navigation buttons
@@ -108,12 +106,11 @@ class _HouseholdSizeState extends State<HouseholdSize> {
                     // Previous button
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(
-                            context);
+                        Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        side: BorderSide(color: primarycolor),
+                        side: const BorderSide(color: primarycolor),
                         padding: const EdgeInsets.symmetric(
                           horizontal: 19,
                           vertical: 13,
@@ -124,70 +121,70 @@ class _HouseholdSizeState extends State<HouseholdSize> {
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize
-                          .min, // Ensures button wraps around content
-                      children: [
-                        const Icon(
-                          Icons.arrow_back,
-                          color: primarycolor,
-                        ),
+                            .min, // Ensures button wraps around content
+                        children: [
+                          const Icon(
+                            Icons.arrow_back,
+                            color: primarycolor,
+                          ),
 
-                        const SizedBox(
-                            width: 8), 
+                          const SizedBox(width: 8),
 
-                        Text(
-                          'Previous',
-                          style: GoogleFonts.dmSans(
-                            textStyle: const TextStyle(
-                              color: primarycolor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                          Text(
+                            'Previous',
+                            style: GoogleFonts.dmSans(
+                              textStyle: const TextStyle(
+                                color: primarycolor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        // Spacing between text and icon
-                      
-                      ],
+                          // Spacing between text and icon
+                        ],
                       ),
                     ),
 
                     // Next button
                     ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Shopping()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primarycolor,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 19,
-                        vertical: 13,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Shopping()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: primarycolor,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 19,
+                          vertical: 13,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(2),
+                        ),
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize
-                          .min, // Ensures button wraps around content
-                      children: [
-                        Text(
-                          'Next',
-                          style: GoogleFonts.dmSans(
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
+                      child: Row(
+                        mainAxisSize: MainAxisSize
+                            .min, // Ensures button wraps around content
+                        children: [
+                          Text(
+                            'Next',
+                            style: GoogleFonts.dmSans(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                            width: 8), // Spacing between text and icon
-                        const Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                      ],
+                          const SizedBox(
+                              width: 8), // Spacing between text and icon
+                          const Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                   ],
                 )
               ],
@@ -198,7 +195,7 @@ class _HouseholdSizeState extends State<HouseholdSize> {
     );
   }
 
-/// Helper to build household size radio options
+  /// Helper to build household size radio options
   Widget _buildHouseholdSizeOption(String value) {
     return RadioListTile<String>(
       value: value,
